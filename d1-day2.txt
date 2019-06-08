@@ -1,0 +1,909 @@
+Threads 
+Spark 
+
+1. New machine have been added (Spark Cluster)
+   Vmware workstation 
+   Start-> Vmware Workstation -> Launch 
+   you should have Centos 7 64 Bit 
+
+   Centos --> Start
+   spark : spark (this is sudo user)=> 
+
+2.  the root  :  root123 
+
+3. on you desktop on the shortcut \tools 
+	if you have the tools folder 
+	Desktop : scala shared folder \tools 
+	a. Winutils-master
+	b.  spark 2.4.1 bin hadoop 2.7 
+------------------------------------------------------
+What is thread in scala and 
+multi threading :- 
+parallel 
+
+spark/spark 
+
+
+
+
+Threads parallel processing 
+Scala is writting in java --> 
+it follows the java conncurency 
+
+A unit of program that runs parellel is known thread  
+Large data --> We need the same to processed parellel 
+distributed data processing 
+a local multithreaded data processing 
+
+100000000 Records 
+each record takes 100 ms to process (cpu)
+make prallel processing --> 
+
+i will have break the data  10 sets 
+process 10 sets of data parallel (100ms)
+120 ms per record  10 // the whoprocessing in 1/10 of  the total --> 
+
+Threads --> scala application running you will need to 
+there a limit of memory and cpu on a single box 
+one single program --> Heap (Size)--> //cpu on single box runs exhaust --> 100%
+
+a) to distribute ---> distributed system (Spark)rdd
+break data and send it to multiple machines and multiple (Node )will process the the chunks and send back a consolidated response 
+
+Storage : Which storage ? should i use for such big data (HDFS)
+
+-Thread 
+	peice of code and has run method defined inside 
+
+-Runnbale
+
+class Thread 
+	def run(){
+		/// whatever you write inside body of the 
+		runs as thread 
+	}
+
+Q1. how can i create a thread 
+Q2.  How can i start  thread 
+Q3.  How can i run multiple threads 
+Q4.  WHat if my run logic is somewhere lese how do i make run inside the thread 
+/// one way to create a thread 
+val thread = new Thread {
+	
+	override def run {
+	   whatever code i write heree ? when will it run 
+	}
+}
+
+thread.start // start is trigger that will submit the thread to to become runnable ---> and if the cpu timeslice is available the thread will run 
+
+
+read a file and file has 1mn records 
+i coudl split in /10 and create smaller list 
+i could provide each list to a thread and expect 
+it complet work and return/store result 
+this scenario qualifies for faster processing provided 
+i have a enough cpu power 
+
+
+How to create a thread 
+
+val thread1 = new Thread {
+	
+	override def run {
+	// kickoff 
+			// your code goes here 
+	}
+}
+
+// how to start a thread // 
+thread1.start();  // start the thread 
+
+val thread2  = new Thread {
+	override def run {
+		// another business logic 
+
+	}
+}
+
+thread2.start(); 
+
+
+
+
+
+
+mSc --> 10 mb --> cdr 
+pipeline configurable number of thread 
+
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+read -->filter --> chargeble--> warehouse --> billing
+
+
+
+
+
+Intel Cpu -- 
+1 CPU = 2 cores dual core 	1 core = 2 dedicated 
+1 CPU = 4 Cores quad core 
+1 cpu = 5 Cores Hexa Core 
+1 Cpu = 8 Cores Octa Core 
+
+2 os thread == 32K Java Thread (Time Slicing )
+this means you will need memory also .... 
+
+// MyThread.scala 
+// code that contains the thread business logics
+class MyThread extends Runnable {
+	
+	def run {
+		// business logic goes here 
+	}
+}
+
+// MyThreadDemo.scala 
+
+// thread start stop logic 
+object MyThreadDemo extends App {
+	
+	val t1 = new Thread(new MyThread);
+	t1.start(); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+To run Spark on  Windows it rquires hadoop binaries 
+due to limitation of GNU-Utils and Hadoop being developed for Linux :- 
+The libraries hadoop are not available on windows 
+Replacer library )(WINUtils----> )
+
+
+
+
+Step 1 : on your desktop you have a shared folder 
+Step 2 : Extract the winutils and and copy the 
+			hadoop2.7.1 to your c drive 
+			note: This folder becomes your 
+				HADOOP_HOME 
+Step 3 : SET up spark directory by extracting the 
+			SPARK_xxxx
+if you have the spark sheel 
+
+first read a file : 
+   val airports = spark.read.textFile("path");
+   val headers  = airports.first ;  // store the 
+   									// first line 
+   									// in the val header
+   val noheadersdata = airports.filter(line => line ! header);
+
+   println(noheadersdata.count);
+   println(noheadersdata.first);
+
+
+
+To make you scala code with with spark you will need to provide the dependencies to scala: 
+Scala dependencies we discussed are generally the classpath we set : 
+Jar files / maven settings / Sbt settings 
+
+jar files --> 
+
+
+Working with Cluster 
+
+
+The username and password to login to your linux box 
+is 
+username : spark 
+password : spark 
+--------------------
+rootuser : root 
+rootpwd  : root123 
+--------------------
+All the installations are in /opt 
+
+
+cd /opt/spark-2.4.3-bin-hadoop2.7/sbin
+./start-master.sh 
+sudo service firewalld stop
+
+ifconfig //get (ens33) ip // 
+
+on your host machine http://ip:8080
+./start-slave.sh spark://sparkmaster:7077
+worker should start appearing ,. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Day 5 : 
+
+a) Learnt what is scala 
+b) what is repl
+c) what is object (Singleton)
+d) what is class 
+e) constructors 
+f) traits 
+g) we can functions 
+h) main methods
+i) Collection 
+j) classes  
+i) The way how maven works 
+j) how sbt works 
+k) how to write scala script 
+l) maven dependencies 
+m) jar files 
+n) spark on windows on stand alone mode 
+o) how understand writing a spark application 
+p) Threads and Runnable (Parellel programming )
+........
+-------------------------------------------------
+Architecture our systems and how are we goint to achieve the things 
+
+
+
+sparkmaster is your  master machine 
+a) this machine will act as master for the spark 
+b) this machine will act as primary name node server (HDFS)
+
+
+worker1 
+a) Act the slave machine for connecting with the spark master 
+b) it also going to act as secondary name node 
+
+
+
+
+own all the files and configuration by the user you 
+are going fir the spark system and hadoop system 
+
+own all the configuration files 
+own all the exuctable that your run 
+Command - 1 
+
+sudo chown -R spark  /opt/*
+
+We need to set the environment : 
+
+bashrc / .bash_profile 
+// what needs to be set in the .bash_profile
+
+
+
+Edit you .bash_profie /.bashrc 
+set your env variable 
+
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:/opt/spark-2.4.3-bin-hadoop2.7/bin/:/opt/spark-2.4.3-bin-hadoop2.7/sbin:/opt/hadoop-2.7.3/bin:/opt/hadoop-2.7.3/sbin:/opt/hadoop-2.7.3/lib/native
+export HADOOP_HOME=/opt/hadoop-2.7.3
+export HADOOP_CONF_DIR=/opt/hadoop-2.7.3/etc/hadoop
+export HADOOP_MAPRED_HOME=/opt/hadoop-2.7.3
+export HADOOP_COMMON_HOME=/opt/hadoop-2.7.3
+export HADOOP_HDFS_HOME=/opt/hadoop-2.7.3
+export YARN_HOME=/opt/hadoop-2.7.3
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HADOOP_HOME/lib/native
+
+
+export PATH
+
+
+You now need to check and run the bash_profile 
+. .bash_profile from you home dir 
+
+env to check all environment variables are set or not 
+
+
+
+
+We saw where our spark and hadoop directories were installed 
+on the linux boxes 
+we set the Require variables 
+HADOOP_HOME
+SPARK_HOME
+MAPRED_HOME
+YARN_HOME.... 
+
+
+
+
+
+
+How to configure the hdfs namenode and the datanode 
+and write some files (airports.csv to the )
+hdfs 
+
+hadoop files system (hdfs)
+
+
+1. core-site.xml // ad the name 
+		hdfs://sparkmaster:9000
+
+2. yarn-site define the shuffler 
+
+3. mapred-site 
+	yarn as the scheduling 
+
+4.  hdfs-site 
+		how many replicas 
+		and whats the permission 
+
+
+5. in the hadoop env file 
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/
+export JAVA_LIBRARY_PATH=${JAVA_LIBRARY_PATH}:${HADOOP_HOME}/lib/native
+
+
+
+6. 
+
+
+1. hadoop installed /opt/hadoop-2.7.3 
+2. Env Variables set 
+3. configuration done (/etc/hadoop/4 files)
+4. copied the configuration to the node 
+5. sparkmaster in place 
+6. in the shell prompt of the master 
+
+
+
+
+start-dfs.sh // start dfs // 
+
+it will start you namenode/secondarynode/datanode 
+
+
+
+
+cd /opt/hadoop-2.7.3/sbin
+
+./start-dfs.sh  // start 3 things 
+name node 
+data node 
+secondary node 
+
+
+hdfs dfs -ls / 
+hdfs dfs -copyFromLocal fileName.txt / 
+hdfs dfs -cat  /filename.txt 
+hdfs dfs -rm  /filename.txt 
+
+hdfs dfsadmin -report 
+
+dfs-stop.sh 
+dhs-start.sh
+
+you have created a namenode , you created a datanode : 1
+
+spark-defaults.conf // CONTAINT THE NAME OF THE MASTER
+CONTAINTS THE LOGGING 
+CONTIAINS FEW OTHE serialization settings 
+
+
+log4j.properties // this for the logger 
+how much verbose logger you want you determine 
+from here 
+
+
+Spark-env
+
+SPARK_MASTER_HOST=sparkmaster
+SPARK_MASTER_PORT=7077
+JAVA_LIBRARY_PATH=${JAVA_LIBRARY_PATH}:${HADOOP_HOME}/lib/native
+
+
+
+
+
+To start the slave 
+first your master should be running 
+you should know you master url whihch is visible on the 
+master page 
+http://sparkmaster:8080 
+
+spark://sparkmaster:7077 // is the masterurl 
+
+
+cd /opt/spark-hadoop-2.7.3/sbin
+
+./start-slave.sh spark://sparkmaster:7077 
+
+
+
+7077: the spark master port : THe Master server
+
+8080 : this is the monitoring ui on the spark master: ui 
+
+9000 : hdfs cluster point  
+
+
+
+
+
+Repeat the same steps on worker1
+add Entries .bash_profile 
+ . .bash_profile 
+
+ copy the configue env to haddop 
+ conf to the spark 
+
+startDfs.sh on worker1 
+startSlave.sh  spark://sparkmaster:7077 
+
+1. jar that contains the job class 
+2. you should name of the clas 
+3. the name of master 
+
+spark-submit --class cg.samp2.ScalaSparkDemo --master spark://sparkmaster:7077  hdfs://sparkmaster:9000/test.jar 
+
+
+this would submit the job and run the job main 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Day -6  Starting in 2 mins :-----
+
+Spark in local format 
+	Windows / Linux / Programming Environment 
+				Driver
+				------
+				  ()
+			==============
+			| n1| n2 | n3 |........
+			==============
+				 HDFS 
+			[primary] [sec]	
+			  |					|
+			 dnode1 ........ Dnoden
+			======================	
+Storage : HDFS 
+
+spark in local : 
+spark-shell : --> 
+
+spark-shell --master spark://host:port (master)
+spark-submit -- submit jobs (jarfiles)
+
+Gist : 
+Spark : 
+1)  Is distributed computed -: with Threads (Parellel)
+2)  SPARK --> can distribute jobs to mulitple workers 
+3)  SPark can create jobs and parttion them 
+	100000 --> 4 
+4)  Spark has all inmemory (cache) 90% (persist)
+5)  spark has the following libraries 
+		a) Spark Core (Resilent Distributed Data)
+		b) SPark SQL (DataFrames (Tables,views))
+					//json,csv,jdbc,header and other 
+		c)  MLib (Machine Learning)
+		d)  Graph-X 
+
+---------------------------------------------------------------
+spark in local 
+
+SparkConf 
+// which master or what is jobname where is wish to connect 
+SparkContext 
+// sparkContenx the driver by which a) you can control the spark 
+application a) read files , b) create rdd , creat any things that you wish do with the spark 
+SparkSession : ---> Which actually extends context--> 	
+	read . json , dataframe , sql , jdbc 
+
+
+i want to connect to remote clluster ? 
+where will i write the configuration 
+a) Where is the master node 
+b) what is my application job name (When submit application is can trace it from the ui)
+c) what are the number, workers i should be using (*) or my defined ones 
+
+val sparkConfig = new SparkConf().setMaster("spark://host:port").setAppName("app1");
+// jdbc url , username, password ,sid 
+// the spark configuration is passed to create SparkContext 
+// DataBase Conecttion 
+jdbc						 spark 
+======================================================
+driver(jdbc)				| spark-core driver
+url							| master url
+username,password			| enable security
+connection					|  sc , sparkSession 
+crud						|  sc.saveFile, readfile, queries,
+exit 						|  end 
+DataBase 					|  run on the number of workers 
+function feature			|  spark-sql
+							|  spark streaming
+=========================================================
+Spark Application can inherently be scala :- 
+
+Scala Application 
+	|-----src 
+			|---main 
+				 |---scala 
+				 		|---com.cg
+				 				|----App.scala 
+				test
+				 |--scala
+				 	  |--com.cg.test
+				 	  		|---UnitTest.scala 
+	|---pom.xml	
+		  |------dependencies 
+		  				|-----spark-core
+		  				|-----spark-sql
+		  				|-----spark-streaming
+		  				|-----spark-graphx 
+
+		  |--- plugins 
+		  			|----- shade : plugin 
+		  					|---- fat jar/thin jar 
+		  					a) fat jar is jar that would 
+		  					be purely having all dependencies 
+		  					bundled in a single jar file 
+		  					// single 	
+
+		  					b) thin jar onlu contain 
+		  						my classes and not other 
+		  						dependencies 
+
+==============================================================
+Where am i runing it 
+a) windows (local spark system) "local"
+b) what is that i am running
+	spark job  ==>Submit 
+	spark prog ==> locall 
+c) SParkShell -> 
+
+How to write my first Spark Application :- 
+a) windows a local spark application development 
+b) linux with 1 master, 1 worker which is a remote environment 
+	ie. like the production 
+===============================================================
+spark commands 
+a) bin
+	spark-shell.cmd
+		also starts a local cluster mode 
+	spark-submit.cmd
+	spark-sql.cmd
+	spark-class.cmd
+
+b) sbin // sbin is not available on windows 
+===============================================================
+there is a local mode the master 
+development mode always :local 
+
+there is a remote mode of the master
+production mode is always : remote  
+===============================================================
+first Spark Program :-
+a) i need a spark-core library 
+	(maven dependencies)
+	 <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.11</artifactId>
+      <version>2.4.3</version>
+    </dependency>
+
+    because i added this now i have an access to the 
+    SparkConf class 
+    SparkContext Classs 
+    SparkSession 
+
+
+b) i need to create a spark-configuration 
+	i) the name of the app 
+	ii) the master to which i should connect (local)
+
+c) using the spark configuration i can build the sparksession 	
+	or the spark context 
+
+==============================================================
+spark-shell					|		    spark-app(.scala)
+sc (inherent)				|		 sc not available 
+sparksession(inherent)		|		no not available 
+sparkother Variables        |	    they are not 
+===============================================================
+
+
+
+
+
+Set up you development environment to support programming 
+of spark atleast for the RDD Purpose . 
+
+a) add a entry to your pom.xml 
+b) create a scala Object with main method 
+c) add the SparkConf + then create SparkContext 
+d) try creating rdd's 
+----------------------------------------------------------------
+
+We are going to write programs that will allows to do 
+RDD;s
+
+Resilient Distributed DataSet
+RDD 
+
+1000000
+map // each record of the rdd when itereated can have 
+		some enhancedment via map 
+flatMap // convert the complete rdd in single record 
+filter // if the case true --> 
+reduce 
+
+a)  sc.textFile
+b)  array -->sc.parellelize(array);
+c)  spark.read.json().rdd /// json /rdd 
+
+------------------------------------------------------------------
+1. when you dependecies to maven they get added to you classpath 
+2. compatibility layer 
+3. You added depenedency to you spark-core
+<dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-core_2.11</artifactId>
+      <version>2.4.3</version>
+    </dependency>
+
+4. create new scala Object : 
+
+
+starting in 5 mins 
+
+
+
+1.   spark-shell 
+2.   http://localhost:4040 
+3.   in the spark-shell 
+		:paste 
+
+4. paste the code form the chat windows 
+5. 
+
+
+
+
+
+
+Step 1 : your started a spark-shell 
+Step 2 : you http://localhost:4040
+Step 3 :  :paste 
+
+
+
+
+
+
+We can write spark Application Scala 
+
+SparkConf 
+SparkContext 
+SparkSession 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
