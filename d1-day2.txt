@@ -758,6 +758,388 @@ SparkContext
 SparkSession 
 
 
+=========================================================================================
+Day 7 
+=========================================================================================
+spark with scala :- 
+1. spark is not a distributed compute system
+2. spark on windws 
+3. spark  on a linux cluster
+4. spark on standalon code 
+5. spark application with scala 
+6. sc /// sparkContext 
+7. sparkSession /// spark
+8. spark-shell 
+9. master 
+10. workers 
+11. hdfs usage 
+12. how to read files / map/filter/take 
+13. RDD
+14. data is being read from a file 
+15. how we could json,csv  formatter data (Schema)
+16. maven /sbt/gradle 
+17. jar and how the jar (use the jar and submit jobs as spark jobs ) 
+
+Spark 
+-----
+Spark - Core libary
+RDD --> Standard RDD function 
+
+val sparkConf = new SparkConf().setAppName().setMaster();
+val sc = SparkContext(conf);// get the confiu
+sc.textFile // one way to create RDD 
+sc.parellize // 
+we could actuall a large data activities 
+count 
+filter 
+map 
+flatMap 
+take 
+RDD does not have a schematic and RDD of flat Data that i would work with 
+-------------------------------------------------------------------------------------
+Spark - Sql Library 
+is more of schematics --> 
+a) json 
+b) csv 
+c) parquet 
+d) xml 
+
+  <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+if i donot add the dependency in to my application pom.xml i will not get the 
+the jar files (class files in my classpath) it bound to have a clear no class found 
+
+
+
+
+RDD   	v/s   DataFrames  
+--------------------------
+Streaming Data .....
+
+a) Twitter 
+b) Kafka 
+c) S3 
+d) HDFS 
+e) MQTT
+f) Kinesis 
+g) Log Server ---> 
+
+// converted to a dataframe or rdd ///
+
+	
+
+
+Streaming data :- 
+used for Live feeds 
+a) Twitter (Developer)
+b) Kafka 
+c) MQTT  (IoT Devices)
+d) Kinesis 
+e) S3 / Simple Storage Service 
+f) hdfs file 
+------------------------------------------
+
+csv , json , jdbc,
+
+when i go to spark shell 
+spark libaries but it does not have the driver jar : 
+
+
+
+
+
+1. file // .read.json
+			.read.csv 
+			.read.flatFiles 
+2. i am going to run the  database : 
+	url
+	username
+	password 
+	driver 
+3. jar file // maven url (mysql connector maven )
+4. to run this on a spark-shell its important that you run the same with 
+	--jars 
+	spark-shell --jars c:\lib\mysql-connector-java-5.1.47.jar
+5. if you are running this from your application 
+	 <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.47</version>
+            </dependency>
+6. You will need a table 
+	you open toad for mysql 
+	you just connect to the db (username : root  / passwird : root123 )
+
+val test_table =  """ (select * from test_table where name = 'nilesh') foo""";
+
+7.  spark.read.format("jdbc").option("url","jdbc:mysql://localhost:3306/test").option("driver","com.mysql.jdbc.Driver").option("user","root").option("password","root")
+.option("dbtable",test_table).load();
+
+
+
+can i run a query and fetch the table first using 
+-----------------------------------------------------------------------------------------
+
+
+
+
+How to read xml file 
+1. Step you will need to enable databricks support 
+<dependency>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-xml_2.11</artifactId>
+            <version>0.5.0</version>
+        </dependency>
+ 2. understand the schema of your xml and define a rowTag 
+ 3. write the code 
+  val sparkSession =
+        SparkSession.builder.
+          appName("xmldemo").
+          master("local[*]").
+          getOrCreate();
+    val df = sparkSession.read.
+              format("com.databricks.spark.xml").
+              option("rowTag", "book").
+              load("d:/inputData/books.xml");
+    df.show();
+ 4. run the code with databricks 
+
+
+==================================================================================
+1. How can i parse more complex xml 
+2. How can join data where keys not matching 
+3. Can i use a csv which xml inside inside it 
+----------------------------------------------------------------------------------
+
+
+a) Can i read xml 
+b)  can i read flat files 
+c)  can i read xml 
+d)  can i read json 
+e)// how to write your own schemas for parse 
+-------------------------------------------------------------------------------------
+
+How to actually use the  Streaming data : 
+for Streaming data ---> 
+s3 ---> 
+
+twitter ---> live twitter feed --> sentiment analysis on topic --> 
+s3 ----> (Cloud based storage ---> putting files continously to the s3 )
+	and as soon as i get the file i will be triggering the data reads 
+
+
+there should be a host:port --> (Socket Read , Socket Writer )
+
+
+If i want streaming data ---> Live Data ---> Live Feeds ---> Atom Feeds ->
+Live constant feeds 
+
+ <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>2.4.3</version>
+  </dependency>
+
+Simple Storage Service ---> cloud file store --> moinitor 
+one add file --> wish trigger a immediate reading 
+
+1. you should setup your pom.xml with the following 
+	a) spark-core 
+	    <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+
+	b) spark-sql
+	<dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+
+	c) the spring-streaming
+	    <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+ 
+    d)  Databricks (XML purpose )
+		<dependency>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-xml_2.11</artifactId>
+            <version>0.5.0</version>
+        </dependency>
+
+    e)  MySQL library to ensure we can read data from (jdbc )
+     <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.47</version>
+            </dependency>
+
+    f) How to read data from streaming context from 
+    	
+    	adding 2 libraries 
+
+	<dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-aws</artifactId>
+            <version>2.7.1</version>
+        </dependency>
+        
+        <!--- new version of Jackson which does not come with the hadoop library --> 
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.9.9</version>
+        </dependency>
+
+
+
+
+
+i can read data on socket 
+i can read data on file service (S3)
+i can read data on kafka server message are being published 
+i can read data from twitter api ... streaming 
+
+Step1 : 
+<dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>2.4.3</version>
+        </dependency>
+
+Step 2 : 
+	We decide where read to the data ? 
+	how bring stream on my local machine : - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+how do i do the streaming 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Spark - Streaming 
+Spark - MLib 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
