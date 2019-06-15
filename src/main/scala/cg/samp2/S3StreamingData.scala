@@ -12,7 +12,9 @@ object S3StreamingData {
 
     val hadoopConf=sc.hadoopConfiguration;
     hadoopConf.set("fs.s3.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
-      val ssc = new org.apache.spark.streaming.StreamingContext(
+    hadoopConf.set("fs.s3.awsAccessKeyId","AKIAJVF3N55SV6CZHPDA")
+    hadoopConf.set("fs.s3.awsSecretAccessKey","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")
+    val ssc = new org.apache.spark.streaming.StreamingContext(
       sc,Seconds(10));
     val lines = ssc.textFileStream("s3://ioteventsbucket/")
     lines.print(100);
