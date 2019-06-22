@@ -1053,6 +1053,160 @@ Step 2 :
 
 
 
+Starting
+----------
+1. We have taken scala (Activities)
+scala is function programming -->
+2. scala repl shell
+3. Scala maven / gradle/sbt setups
+4. pom.xml
+5. spark hdfs cluster and worker get setup
+6. how we can write spark scala programs
+7. spark shell
+8. the spark sql
+9. the spark streaming
+10. spark dataframes
+11. Spark rdd
+12. spark the sql connect
+13. spark application developement
+14. spark core library
+15. spark sql libary
+16. spark application with streaming how stream data can be pushed
+17. how to compile spark application with intellij
+18. Example Stream data over s3 : You could put on s3
+19. how the spark context works
+20. sparkconfig
+21. sparksession works
+22. how the spark application makes use of the  DaG
+21. how we can make use array and collections
+22. Threads
+21. Even the command line for spark
+22. Mlib , the WebSevice , Cloud features
+23. Joins
+24. how the certification we can do and what we should read
+25. we would see how we can  write application end to end
+--------------------------------------------------------------------------------------
+Code is in the git
+nilesh.devdas@vinsys.com
+--------------------------------------------------------------------------------------
+
+1. Joins
+
+
+Streaming context -->
+they get the anaylisys done --->
+data to web socket some kind listener =>
+highcharts requires data from service ?
+
+we should know how to write a rest service --> webservice
+
+Scala + spark + webservice ---> Data is visible on xml / json over http
+Write a service
+
+
+
+How to write webservice with scala: so that my data is serviced over the webservices
+apify (Creates api for my application);
+
+1. Akka (is a Actor Libary for Creating , Spawing threads in the world of scala)
+2. some api for webservice
+
+
+
+        <!-- -->
+        <dependency>
+            <groupId>io.spray</groupId>
+            <artifactId>spray-json_2.11</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.spray</groupId>
+            <artifactId>spray-can_2.11</artifactId>
+            <version>1.3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.spray</groupId>
+            <artifactId>spray-routing_2.11</artifactId>
+            <version>1.3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.spray</groupId>
+            <artifactId>spray-testkit_2.11</artifactId>
+            <version>1.3.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.11</artifactId>
+            <version>2.5.23</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-testkit_2.11</artifactId>
+            <version>2.5.23</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalaz</groupId>
+            <artifactId>scalaz-core_2.11</artifactId>
+            <version>7.2.27</version>
+        </dependency>
+
+
+
+1. Add the above dependencies in the dependencies section of your pom.xml
+2. Add rhe service.scala
+3. ServiceActor.scala
+
+
+Spark Core : RDD
+Spark SQL  : json ,xml , csv, jdbc
+Streaming  : socket, s3, hdfs , streaming
+MLLib 	   : classification using RandomForest, Kmeans, Naive Bayes , Decision Trees
+		Clustering ,  fpm , linalgebra , recommendations, regression
+
+=====================================================================================
+Spark can be used on the cloud
+------------------------------------------------------------------------------------
+Spark Cluster in local (Single Node)
+----------------------------------------------------------------------------------
+Spark Cluster in linux
+----------------------------------------------------------------------------------
+Spark Cluster With Worker and HDFS
+----------------------------------------------------------------------------------
+Parsed CSV , XML , JSON , JDBC , TEXT ,
+=================================================================================
+DataFrames , RDD
+================================================================================
+accumulators and broadcasts
+---------------------------------------------------------------------------------
+the spark ui , With Storage (Persist and cache )
+---------------------------------------------------------------------------------
+Maven and how to setup maven pom.xml
+---------------------------------------------------------------------------------
+spark-shell  spark-shell
+----------------------------------------------------------------------------------
+using spark with services (WebService Akkka and Spray )
+==================================================================================
+
+a) highcharts , html ,css, javascript for the front end
+
+b) websockets , rest api for data retrival
+
+c) service --> scala
+
+d) spark streaming data
+
+e) data source (socket, s3, hdfs )
+Event triggers
+
+====================================================================================
 
 
 
@@ -1063,7 +1217,6 @@ Step 2 :
 
 
 
-how do i do the streaming 
 
 
 
@@ -1101,8 +1254,43 @@ how do i do the streaming
 
 
 
-Spark - Streaming 
-Spark - MLib 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
